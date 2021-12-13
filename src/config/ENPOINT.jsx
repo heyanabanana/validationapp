@@ -1,0 +1,1 @@
+export const ENDPOINT = "https://validacion-desarrollo.herokuapp.com/api"
