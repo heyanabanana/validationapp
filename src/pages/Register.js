@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import useUser from "../config/UseUser";
 import { useForm } from "react-hook-form";
@@ -45,22 +45,24 @@ export default function Register() {
   });
   const [, navigate] = useLocation();
 
-  const { isRegisterLoading, hasRegisterError, signIn, isRegister } = useUser();
-
+  const { isRegisterLoading, hasRegisterError, signIn, isRegister, isLogged } = useUser();
+  const [hashcode, setHashcode] = useState(null)
+  
   const onSubmit = (data) => {
-    signIn(data);
+    signIn(data)
     console.log(data);
-    navigate("/onboarding");
+    setHashcode(window.sessionStorage.getItem("hashcode"))
   };
 
-  //TODO: AUTOCOMPLETE LOGIN AT REGISTER
 
   useEffect(() => {
-    if (isRegister) navigate("/login");
+    if (isRegister) navigate("/onboarding");
   }, [isRegister, navigate]);
 
   return (
-    <Flex
+    <>
+    { isLogged ? (
+    navigate("/") ) : (<Flex
       w="auto"
       p={10}
       mt={10}
@@ -172,6 +174,12 @@ export default function Register() {
           </form>
         )}
       </Flex>
-    </Flex>
+    </Flex> ) }
+
+    {hashcode == null ? (<p></p> ):(<Alert status='success'>
+    <AlertIcon />
+    Data uploaded to the server. Fire on!
+  </Alert> )}
+    </>
   );
 }

@@ -1,7 +1,7 @@
 
 import { ENDPOINT } from '../config/ENPOINT';
 
-export default function loginService({ username, password }) {
+export default function getUsers({ token }) {
   return fetch(`${ENDPOINT}/auth/login`, {
     method: "POST",
     headers: {

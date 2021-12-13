@@ -7,8 +7,10 @@ export function UserContextProvider({ children }) {
     window.sessionStorage.getItem("token")
   );
   const role =  window.sessionStorage.getItem("role")
+
+
   return (
-    <Context.Provider value={{ token, setToken,  role }}>
+    <Context.Provider value={{ token, setToken, role }}>
       {children}
     </Context.Provider>
   );

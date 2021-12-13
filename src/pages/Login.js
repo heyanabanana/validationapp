@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import { useLocation, Link } from "wouter";
 import useUser from "../config/UseUser";
@@ -20,7 +21,7 @@ import {
 
 export default function Login() {
   const [, navigate] = useLocation();
-
+  
   //FORM VALIDATION
   const schema = yup
     .object({
@@ -39,9 +40,10 @@ export default function Login() {
 
   // SET NAVIGATION BASED ON ROLES
   const role = window.sessionStorage.getItem("role");
+  console.log(role)
   useEffect(() => {
     if (isLogged) {
-      if (role === "ADMIN") {
+      if (role == "ADMIN") {
         navigate("/dashboard");
       } else navigate("/account");
     }

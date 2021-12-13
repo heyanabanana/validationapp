@@ -6,25 +6,24 @@ import {
   ListItem,
   Button,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
 import { Link } from "wouter";
 
 const Onboarding = () => {
-  const fullname = window.sessionStorage.getItem("fullname");
-  const hashcode = window.sessionStorage.getItem("hashcode");
-  console.log(hashcode);
 
-  console.log(fullname);
+const hashcode = window.sessionStorage.getItem('hashcode');
+
   return (
-    <Flex w="100vw" align="center" justify="center" mt={20} direction="column">
-      <Heading as="h1" color="teal">
-        Welcome, {fullname}
+    <Flex w="100vw" align="center" justify="center" mt={10} mb={10} direction="column">
+           <Heading as="h1" color="teal">
+        Welcome 
       </Heading>
       <Text color="gray.500">
         We need to validate your identity. Please have your identity document
         handy.
       </Text>
+
       <Heading mt={10} mb={2} as="h2" color="teal" size="sm">
         Follow the steps below:
       </Heading>
@@ -38,10 +37,12 @@ const Onboarding = () => {
           Your account will be validated soon by an administrator
         </ListItem>
       </UnorderedList>
+
       <QRCode value={`/onboarding/${hashcode}`} params={hashcode} />
       <Heading mt={10} mb={2} as="h2" color="teal" size="sm">
         No phone? Continue with computer:
       </Heading>
+      
       <Link to={`/onboarding/${hashcode}`} params={hashcode}>
         <Button colorScheme="teal">Upload Files</Button>
       </Link>

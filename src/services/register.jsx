@@ -21,12 +21,14 @@ export default function registerService({
       return res.json();
     })
     .then((res) => {
-      const fullname = res.user.fullname;
-      const username = res.user.username;
-      const hashcode = res.hashcode;
-      window.sessionStorage.setItem("hashcode", hashcode);
-      window.sessionStorage.setItem("username", username);
-      window.sessionStorage.setItem("fullname", fullname);
-      return name;
+      console.log(res)
+      // const username = res.user.username;
+      // const fullname = res.user.fullname;
+      // const hashcode = res.hashcode;
+      // window.sessionStorage.setItem("hashcode", hashcode);
+      // window.sessionStorage.setItem("username", username);
+      // window.sessionStorage.setItem("fullname", fullname);
+
+      return res;
     });
 }

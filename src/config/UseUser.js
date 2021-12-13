@@ -17,14 +17,12 @@ export default function useUser() {
       loginService({ username, password })
         .then((token) => {
           window.sessionStorage.setItem("token", token);
-
+          window.sessionStorage.setItem("username", username);
           setState({ loading: false, error: false });
           setToken(token);
         })
         .catch((err) => {
-          window.sessionStorage.removeItem("token");
-          window.sessionStorage.removeItem("role");
-
+          window.sessionStorage.clear()
           setState({ loading: false, error: true });
           console.log(err);
         });
@@ -35,17 +33,17 @@ export default function useUser() {
   const signIn = useCallback(({ name, email, surname, password, username }) => {
     setState({ loading: true, error: false });
     registerService({ name, email, surname, password, username })
-      .then((name) => {
+      .then((res) => {
         setState({ loading: false, error: false });
+        window.sessionStorage.setItem("hashcode", res.hashcode);
+        window.sessionStorage.setItem("username", res.user.username);
+        window.sessionStorage.setItem("fullname", res.user.fullname);
         setIsRegister(true);
-        window.sessionStorage.setItem("hashcode");
-        window.sessionStorage.setItem("username");
-        window.sessionStorage.setItem("fullname");
+
+      
       })
       .catch((err) => {
-        window.sessionStorage.removeItem("hashcode");
-        window.sessionStorage.removeItem("username");
-        window.sessionStorage.removeItem("fullname");
+        window.sessionStorage.clear()
         setState({ loading: false, error: true });
         setIsRegister(false);
         console.log(err);
@@ -53,8 +51,8 @@ export default function useUser() {
   }, []);
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem("token");
-    window.sessionStorage.removeItem("role");
+    window.sessionStorage.clear()
+
 
     setToken(null);
     navigate("/");
