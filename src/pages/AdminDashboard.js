@@ -131,7 +131,9 @@ const AdminDashboard = () => {
 
   // VERIFIED USER
   const [isOpen, setIsOpen] = React.useState(false);
-  const onClose = () => {};
+  const onClose = () => {
+    setIsOpen(false);
+  };
   console.log(selectedUser);
   const cancelRef = React.useRef();
 

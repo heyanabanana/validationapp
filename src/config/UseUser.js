@@ -8,7 +8,7 @@ export default function useUser() {
   const { token, setToken } = useContext(Context);
   const { role, setRole } = useContext(Context);
   const { hashcode, setHashcode } = useContext(Context);
-
+  const { username, setUsername } = useContext(Context);
   const [, navigate] = useLocation();
   const [isRegister, setIsRegister] = useState(false);
   const [state, setState] = useState({ loading: false, error: false });
@@ -21,9 +21,12 @@ export default function useUser() {
           setState({ loading: false, error: false });
           window.sessionStorage.setItem("token", res.token);
           window.sessionStorage.setItem("role", res.role);
+          window.sessionStorage.setItem("username", res.username);
 
+          console.log(res);
           setToken(res.token);
           setRole(res.role);
+          setUsername(res.username);
         })
         .catch((err) => {
           window.sessionStorage.clear();
@@ -31,7 +34,7 @@ export default function useUser() {
           console.log(err);
         });
     },
-    [setRole, setToken]
+    [setRole, setToken, setUsername]
   );
 
   const signIn = useCallback(
@@ -74,6 +77,8 @@ export default function useUser() {
     token,
     hashcode,
     role,
+    username,
+    setUsername,
     isRegisterLoading: state.loading,
     hasRegisterError: state.error,
   };

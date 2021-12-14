@@ -12,10 +12,22 @@ export function UserContextProvider({ children }) {
   );
 
   const [role, setRole] = useState(() => window.sessionStorage.getItem("role"));
+  const [username, setUsername] = useState(() =>
+    window.sessionStorage.getItem("username")
+  );
 
   return (
     <Context.Provider
-      value={{ token, setToken, role, setRole, hashcode, setHashcode }}
+      value={{
+        token,
+        setToken,
+        role,
+        setRole,
+        hashcode,
+        setHashcode,
+        username,
+        setUsername,
+      }}
     >
       {children}
     </Context.Provider>

@@ -19,6 +19,7 @@ import Register from "./pages/Register";
 import Onboarding from "./pages/Onboarding";
 import UploadImages from "./pages/UploadImages.js";
 import AdminDashboard from "./pages/AdminDashboard";
+import UserDashboard from "./pages/UserDashboard";
 
 function App() {
   return (
@@ -32,11 +33,10 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/onboarding" component={Onboarding} />
           <Route path="/dashboard" component={AdminDashboard} />
-
+          <Route path="/account" component={UserDashboard} />
           <Route path="/onboarding/:hashcode">
             {(params) => <UploadImages id={params.hashcode} />}
           </Route>
-
         </SectionContainer>
       </ChakraProvider>
     </UserContextProvider>
