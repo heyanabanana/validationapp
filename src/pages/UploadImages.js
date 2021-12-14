@@ -1,52 +1,45 @@
 import React, { useRef, useState } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-import { ENDPOINT } from '../config/ENPOINT';
+import { ENDPOINT } from "../config/ENPOINT";
+import useUser from "../config/UseUser";
 
-function UploadImages (params) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const [photo1, setPhoto1] = useState();
-  const [photo2, setPhoto2] = useState();
-  const [data, setData] = useState();
+import { FilePond, File, registerPlugin } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
+import { Link } from "wouter";
 
-  const hashcode = window.sessionStorage.getItem("hashcode");
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
+function UploadImages(params) {
+  const { hashcode } = useUser();
+  console.log(hashcode);
 
-  const onSubmit = (data) => {
-    fetch(`${ENDPOINT}/onboarding/photos/${hashcode}`, {
-      method: "PUT",
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: data,
-    })
-      // .then((response) => {
-      //   if (!response.ok) throw new Error("Response is NOT ok");
-      //   return response.json();
-      // })
-      .then((response) => {
-        console.log(response);
-        sessionStorage.setItem("response", response);
-        return response;
-      });
-  };
+  const [files, setFiles] = useState([]);
 
   return (
     <Flex p={10} direction="column">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="file" {...register("photo1")}
-/>
-        <input type="file" {...register("photo2")}
- />
-         <input type="hidden" value={hashcode} {...register("hashcode")}
- />
-        <button type="submit">SEND</button>
-      </form>
+      <FilePond
+        files={files}
+        onupdatefiles={setFiles}
+        allowMultiple={true}
+        maxFiles={2}
+        server={`${ENDPOINT}/onboarding/uploadphoto/${hashcode}`}
+        name="photo"
+        labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
+      />
+      {console.log(files)}
+
+      {files.length === 2 ? (
+        <Link to="/login">
+          <Button colorScheme="teal">Continuar</Button>
+        </Link>
+      ) : (
+        <Button colorScheme="gray">Continuar</Button>
+      )}
     </Flex>
   );
-};
+}
 export default UploadImages;

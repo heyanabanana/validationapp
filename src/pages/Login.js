@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
 import useUser from "../config/UseUser";
 import { useForm } from "react-hook-form";
@@ -21,7 +21,10 @@ import {
 
 export default function Login() {
   const [, navigate] = useLocation();
-  
+  window.sessionStorage.clear();
+
+  // const [role, setRole] = useState();
+
   //FORM VALIDATION
   const schema = yup
     .object({
@@ -29,7 +32,8 @@ export default function Login() {
       username: yup.string().required("DNI is required"),
     })
     .required();
-  const { isLoginLoading, hasLoginError, login, isLogged } = useUser();
+
+  const { isLoginLoading, hasLoginError, login, role } = useUser();
   const {
     register,
     handleSubmit,
@@ -38,19 +42,15 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  // SET NAVIGATION BASED ON ROLES
-  const role = window.sessionStorage.getItem("role");
-  console.log(role)
-  useEffect(() => {
-    if (isLogged) {
-      if (role == "ADMIN") {
-        navigate("/dashboard");
-      } else navigate("/account");
-    }
-  }, [isLogged, navigate, role]);
-
   //LOGIN SERVICE
-  const onSubmit = (data) => login(data);
+  const onSubmit = (data) => {
+    login(data);
+    if (role == "ADMIN") {
+      navigate("/dashboard");
+    } else if (role == "USER") {
+      navigate("/account");
+    }
+  };
 
   return (
     <>

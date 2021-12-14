@@ -6,7 +6,9 @@ import { useLocation } from "wouter";
 
 export default function useUser() {
   const { token, setToken } = useContext(Context);
-  const role = useContext(Context);
+  const { role, setRole } = useContext(Context);
+  const { hashcode, setHashcode } = useContext(Context);
+
   const [, navigate] = useLocation();
   const [isRegister, setIsRegister] = useState(false);
   const [state, setState] = useState({ loading: false, error: false });
@@ -15,44 +17,47 @@ export default function useUser() {
     ({ username, password }) => {
       setState({ loading: true, error: false });
       loginService({ username, password })
-        .then((token) => {
-          window.sessionStorage.setItem("token", token);
-          window.sessionStorage.setItem("username", username);
+        .then((res) => {
           setState({ loading: false, error: false });
-          setToken(token);
+          window.sessionStorage.setItem("token", res.token);
+          window.sessionStorage.setItem("role", res.role);
+
+          setToken(res.token);
+          setRole(res.role);
         })
         .catch((err) => {
-          window.sessionStorage.clear()
+          window.sessionStorage.clear();
           setState({ loading: false, error: true });
           console.log(err);
         });
     },
-    [setToken]
+    [setRole, setToken]
   );
 
-  const signIn = useCallback(({ name, email, surname, password, username }) => {
-    setState({ loading: true, error: false });
-    registerService({ name, email, surname, password, username })
-      .then((res) => {
-        setState({ loading: false, error: false });
-        window.sessionStorage.setItem("hashcode", res.hashcode);
-        window.sessionStorage.setItem("username", res.user.username);
-        window.sessionStorage.setItem("fullname", res.user.fullname);
-        setIsRegister(true);
-
-      
-      })
-      .catch((err) => {
-        window.sessionStorage.clear()
-        setState({ loading: false, error: true });
-        setIsRegister(false);
-        console.log(err);
-      });
-  }, []);
+  const signIn = useCallback(
+    ({ name, email, surname, password, username }) => {
+      setState({ loading: true, error: false });
+      registerService({ name, email, surname, password, username })
+        .then((res) => {
+          setState({ loading: false, error: false });
+          window.sessionStorage.setItem("hashcode", res.hashcode);
+          window.sessionStorage.setItem("username", res.user.username);
+          window.sessionStorage.setItem("fullname", res.user.fullname);
+          setHashcode(res.hashcode);
+          setIsRegister(true);
+        })
+        .catch((err) => {
+          window.sessionStorage.clear();
+          setState({ loading: false, error: true });
+          setIsRegister(false);
+          console.log(err);
+        });
+    },
+    [setHashcode]
+  );
 
   const logout = useCallback(() => {
-    window.sessionStorage.clear()
-
+    window.sessionStorage.clear();
 
     setToken(null);
     navigate("/");
@@ -67,6 +72,7 @@ export default function useUser() {
     signIn,
     isRegister,
     token,
+    hashcode,
     role,
     isRegisterLoading: state.loading,
     hasRegisterError: state.error,
