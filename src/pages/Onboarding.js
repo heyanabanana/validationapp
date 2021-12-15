@@ -11,13 +11,19 @@ import QRCode from "react-qr-code";
 import { Link } from "wouter";
 
 const Onboarding = () => {
-
-const hashcode = window.sessionStorage.getItem('hashcode');
+  const hashcode = window.sessionStorage.getItem("hashcode");
 
   return (
-    <Flex w="100vw" align="center" justify="center" mt={10} mb={10} direction="column">
-           <Heading as="h1" color="teal">
-        Welcome 
+    <Flex
+      w="100vw"
+      align="center"
+      justify="center"
+      mt={10}
+      mb={10}
+      direction="column"
+    >
+      <Heading as="h1" color="teal">
+        Welcome
       </Heading>
       <Text color="gray.500">
         We need to validate your identity. Please have your identity document
@@ -38,11 +44,14 @@ const hashcode = window.sessionStorage.getItem('hashcode');
         </ListItem>
       </UnorderedList>
 
-      <QRCode value={`/onboarding/${hashcode}`} params={hashcode} />
+      <QRCode
+        value={`https://validationapp.vercel.app/onboarding/${hashcode}`}
+        params={hashcode}
+      />
       <Heading mt={10} mb={2} as="h2" color="teal" size="sm">
         No phone? Continue with computer:
       </Heading>
-      
+
       <Link to={`/onboarding/${hashcode}`} params={hashcode}>
         <Button colorScheme="teal">Upload Files</Button>
       </Link>

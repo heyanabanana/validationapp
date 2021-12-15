@@ -1,5 +1,4 @@
 import { ENDPOINT } from "../config/ENPOINT";
-import { useLocation } from "wouter";
 
 export default function loginService({ username, password }) {
   return fetch(`${ENDPOINT}/auth/login`, {
@@ -16,6 +15,7 @@ export default function loginService({ username, password }) {
     })
     .then((res) => {
       window.sessionStorage.setItem("token", res.token);
+
       return res;
     });
 }

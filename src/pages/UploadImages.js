@@ -11,12 +11,21 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { Link } from "wouter";
 
+import { useLocation } from "wouter";
+
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 function UploadImages(params) {
-  const { hashcode } = useUser();
-  console.log(hashcode);
+  const [location, setLocation] = useLocation();
 
+  const routeHash = location.replace(
+    "https://validationapp.vercel.app/onboarding/",
+    ""
+  );
+
+  const hashcode = params.hashcode;
+
+  console.log(routeHash);
   const [files, setFiles] = useState([]);
 
   return (
@@ -26,7 +35,7 @@ function UploadImages(params) {
         onupdatefiles={setFiles}
         allowMultiple={true}
         maxFiles={2}
-        server={`${ENDPOINT}/onboarding/uploadphoto/${hashcode}`}
+        server={`${ENDPOINT}/onboarding/uploadphoto/${routeHash}`}
         name="photo"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />

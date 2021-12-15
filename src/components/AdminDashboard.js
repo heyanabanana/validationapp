@@ -163,7 +163,7 @@ const AdminDashboard = () => {
           <Button colorScheme="gray" disabled>
             Validated
           </Button>
-        ) : selectedUser.username === rowData.username ? (
+        ) : selectedUser && selectedUser.username === rowData.username ? (
           <Button colorScheme="green" onClick={() => setIsOpen(true)}>
             Verify
           </Button>

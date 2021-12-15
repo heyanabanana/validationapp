@@ -18,8 +18,8 @@ import NavBar from "./components/NavBar";
 import Register from "./pages/Register";
 import Onboarding from "./pages/Onboarding";
 import UploadImages from "./pages/UploadImages.js";
-import AdminDashboard from "./pages/AdminDashboard";
-import UserDashboard from "./pages/UserDashboard";
+import Dashboard from "./pages/Dashboard";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -29,11 +29,13 @@ function App() {
         <SectionContainer className="App">
           <NavBar />
           <Route path="/" component={HomePage} />
+          <Route path="/*" component={NotFound} />
+
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/onboarding" component={Onboarding} />
-          <Route path="/dashboard" component={AdminDashboard} />
-          <Route path="/account" component={UserDashboard} />
+          <Route path="/dashboard" component={Dashboard} />
+
           <Route path="/onboarding/:hashcode">
             {(params) => <UploadImages id={params.hashcode} />}
           </Route>

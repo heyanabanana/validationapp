@@ -10,8 +10,14 @@ import {
   Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
+import getHashcode from "../services/getHashcode";
 
 export default function UserDashboard() {
+  useEffect(() => {
+    const username = window.sessionStorage.getItem("username");
+    getHashcode(username).then((value) => {});
+  });
   return (
     <Center py={6}>
       <Box

@@ -18,6 +18,7 @@ import {
   AlertTitle,
   CloseButton,
 } from "@chakra-ui/react";
+import { Redirect } from "wouter";
 
 export default function Login() {
   const [, navigate] = useLocation();
@@ -45,11 +46,7 @@ export default function Login() {
   //LOGIN SERVICE
   const onSubmit = (data) => {
     login(data);
-    if (role == "ADMIN") {
-      navigate("/dashboard");
-    } else if (role == "USER") {
-      navigate("/account");
-    }
+    navigate("/dashboard");
   };
 
   return (

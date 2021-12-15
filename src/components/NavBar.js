@@ -34,23 +34,6 @@ const NavBar = () => {
         <HamburgerIcon color="teal" w={10} />
       </Box>
 
-      <Stack
-        direction={{ base: "column", md: "row" }}
-        display={{ base: isOpen ? "block" : "none", md: "flex" }}
-        width={{ base: "full", md: "auto" }}
-        alignItems="center"
-        mt={{ base: 4, md: 0 }}
-      >
-        <Flex align="center">
-          <Button colorScheme="gray.700" variant="ghost">
-            About{" "}
-          </Button>
-          <Button colorScheme="gray.700" variant="ghost">
-            Open Boot Camp
-          </Button>
-        </Flex>
-      </Stack>
-
       <Box
         display={{ base: isOpen ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
