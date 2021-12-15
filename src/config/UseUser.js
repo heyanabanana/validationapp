@@ -27,6 +27,7 @@ export default function useUser() {
           setToken(res.token);
           setRole(res.role);
           setUsername(res.username);
+          navigate("/dashboard");
         })
         .catch((err) => {
           window.sessionStorage.clear();
@@ -34,7 +35,7 @@ export default function useUser() {
           console.log(err);
         });
     },
-    [setRole, setToken, setUsername]
+    [navigate, setRole, setToken, setUsername]
   );
 
   const signIn = useCallback(

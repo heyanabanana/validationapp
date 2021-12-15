@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { InputText } from "primereact/inputtext";
+
 import {
   Flex,
   CircularProgress,
@@ -34,7 +35,7 @@ export default function Login() {
     })
     .required();
 
-  const { isLoginLoading, hasLoginError, login, role } = useUser();
+  const { isLoginLoading, hasLoginError, login, role, isLogged } = useUser();
   const {
     register,
     handleSubmit,
@@ -46,7 +47,6 @@ export default function Login() {
   //LOGIN SERVICE
   const onSubmit = (data) => {
     login(data);
-    navigate("/dashboard");
   };
 
   return (
