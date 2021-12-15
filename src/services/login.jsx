@@ -15,6 +15,8 @@ export default function loginService({ username, password }) {
     })
     .then((res) => {
       window.sessionStorage.setItem("token", res.token);
+      window.sessionStorage.setItem("role", res.role);
+      window.sessionStorage.setItem("username", res.username);
 
       return res;
     });

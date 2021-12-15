@@ -19,10 +19,6 @@ export default function useUser() {
       loginService({ username, password })
         .then((res) => {
           setState({ loading: false, error: false });
-          window.sessionStorage.setItem("token", res.token);
-          window.sessionStorage.setItem("role", res.role);
-          window.sessionStorage.setItem("username", res.username);
-
           console.log(res);
           setToken(res.token);
           setRole(res.role);

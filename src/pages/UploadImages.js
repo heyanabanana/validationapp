@@ -15,14 +15,12 @@ import { useLocation } from "wouter";
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
-function UploadImages(params) {
+function UploadImages() {
   const [location, setLocation] = useLocation();
 
   const routeHash = location.replace("validationapp.vercel.app/onboarding", "");
 
   const hashRoute = routeHash.replace("/onboarding/", "");
-
-  const hashcode = params.hashcode;
 
   console.log(hashRoute);
 
@@ -39,7 +37,6 @@ function UploadImages(params) {
         name="photo"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
-      {console.log(files)}
 
       {files.length === 2 ? (
         <Link to="/login">

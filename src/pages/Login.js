@@ -23,7 +23,6 @@ import { Redirect } from "wouter";
 
 export default function Login() {
   const [, navigate] = useLocation();
-  window.sessionStorage.clear();
 
   // const [role, setRole] = useState();
 

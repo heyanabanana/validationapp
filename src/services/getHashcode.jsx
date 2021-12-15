@@ -2,7 +2,7 @@ import { ENDPOINT } from "../config/ENPOINT";
 
 export default async function getHashcode(username) {
   const res = await fetch(`${ENDPOINT}/hashcode/update/${username}`, {
-    method: "GET",
+    method: "PUT",
     headers: {
       "Access-Control-Allow-Origin": "*",
     },

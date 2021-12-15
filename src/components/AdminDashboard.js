@@ -243,7 +243,7 @@ const AdminDashboard = () => {
         />
         <Column
           field="username"
-          header="Identity Document"
+          header="ID card"
           filter
           filterPlaceholder="Search by document"
           style={{ minWidth: "12rem" }}
@@ -256,13 +256,13 @@ const AdminDashboard = () => {
           style={{ minWidth: "12rem" }}
         />
         <Column
-          header="DNI 1"
+          header="ID card 1"
           filterField="urlDni1"
           style={{ minWidth: "12rem" }}
           body={photo1BodyTemplate}
         />
         <Column
-          header="DNI 2"
+          header="ID card 2"
           filterField="urlDni2"
           style={{ minWidth: "12rem" }}
           body={photo2BodyTemplate}

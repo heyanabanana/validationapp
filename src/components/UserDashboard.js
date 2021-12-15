@@ -5,19 +5,32 @@ import {
   Center,
   Text,
   Stack,
-  Button,
-  Link,
   Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { Image } from "primereact/image";
+
+import { useEffect, useState } from "react";
 import getHashcode from "../services/getHashcode";
 
 export default function UserDashboard() {
-  useEffect(() => {
-    const username = window.sessionStorage.getItem("username");
-    getHashcode(username).then((value) => {});
-  });
+  const [hashcode, setHashcode] = useState();
+
+  const userFake = {
+    fullname: "Fulanito Fernandez",
+    email: "fulanito@fernandez.es",
+    photo1:
+      "https://almenas.es/wp-content/uploads/2021/11/dni-para-perros-scaled.jpeg",
+    photo2:
+      "https://edirectotv.com/wp-content/uploads/2021/10/Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-RADIO-NACIONAL-DE-ESPANA-1.png",
+    validated: true,
+  };
+  // useEffect(() => {
+  // const username = window.sessionStorage.getItem("username");
+  // getHashcode(username).then((value) => {
+  //   setHashcode(value);
+  // });
+  // });
   return (
     <Center py={6}>
       <Box
@@ -31,17 +44,15 @@ export default function UserDashboard() {
       >
         <Avatar
           size={"xl"}
-          src={
-            "https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-          }
           alt={"Avatar Alt"}
           mb={4}
           pos={"relative"}
+          bg="teal"
           _after={{
             content: '""',
             w: 4,
             h: 4,
-            bg: "green.300",
+            bg: "green",
             border: "2px solid white",
             rounded: "full",
             pos: "absolute",
@@ -50,80 +61,21 @@ export default function UserDashboard() {
           }}
         />
         <Heading fontSize={"2xl"} fontFamily={"body"}>
-          Lindsey James
+          {userFake.fullname}
         </Heading>
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          @lindsey_jam3s
+          {userFake.email}
         </Text>
-        <Text
-          textAlign={"center"}
-          color={useColorModeValue("gray.700", "gray.400")}
-          px={3}
-        >
-          Actress, musician, songwriter and artist. PM for work inquires or{" "}
-          <Link href={"#"} color={"blue.400"}>
-            #tag
-          </Link>{" "}
-          me in your posts
-        </Text>
+        <Image src={userFake.photo1} alt={userFake.fullname} preview />
+        <Image src={userFake.photo2} alt={userFake.fullname} preview />
 
-        <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue("gray.50", "gray.800")}
-            fontWeight={"400"}
-          >
-            #art
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue("gray.50", "gray.800")}
-            fontWeight={"400"}
-          >
-            #photography
-          </Badge>
-          <Badge
-            px={2}
-            py={1}
-            bg={useColorModeValue("gray.50", "gray.800")}
-            fontWeight={"400"}
-          >
-            #music
-          </Badge>
-        </Stack>
-
-        <Stack mt={8} direction={"row"} spacing={4}>
-          <Button
-            flex={1}
-            fontSize={"sm"}
-            rounded={"full"}
-            _focus={{
-              bg: "gray.200",
-            }}
-          >
-            Message
-          </Button>
-          <Button
-            flex={1}
-            fontSize={"sm"}
-            rounded={"full"}
-            bg={"blue.400"}
-            color={"white"}
-            boxShadow={
-              "0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-            }
-            _hover={{
-              bg: "blue.500",
-            }}
-            _focus={{
-              bg: "blue.500",
-            }}
-          >
-            Follow
-          </Button>
-        </Stack>
+        <Box mt={4} direction={"row"} spacing={4}>
+          {userFake.validated === true ? (
+            <Badge colorScheme="green">Validated</Badge>
+          ) : (
+            <Badge colorScheme="gray">No validated</Badge>
+          )}
+        </Box>
       </Box>
     </Center>
   );
