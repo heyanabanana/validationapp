@@ -18,14 +18,15 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 function UploadImages(params) {
   const [location, setLocation] = useLocation();
 
-  const routeHash = location.replace(
-    "https://validationapp.vercel.app/onboarding/",
-    ""
-  );
+  const routeHash = location.replace("validationapp.vercel.app/onboarding", "");
+
+  const hashRoute = routeHash.replace("/onboarding/", "");
 
   const hashcode = params.hashcode;
+  console.log(location);
 
-  console.log(routeHash);
+  console.log(hashRoute);
+
   const [files, setFiles] = useState([]);
 
   return (
