@@ -23,7 +23,6 @@ function UploadImages(params) {
   const hashRoute = routeHash.replace("/onboarding/", "");
 
   const hashcode = params.hashcode;
-  console.log(location);
 
   console.log(hashRoute);
 
@@ -36,7 +35,7 @@ function UploadImages(params) {
         onupdatefiles={setFiles}
         allowMultiple={true}
         maxFiles={2}
-        server={`${ENDPOINT}/onboarding/uploadphoto/${routeHash}`}
+        server={`${ENDPOINT}/onboarding/uploadphoto/${hashRoute}`}
         name="photo"
         labelIdle='Drag & Drop your files or <span class="filepond--label-action">Browse</span>'
       />
