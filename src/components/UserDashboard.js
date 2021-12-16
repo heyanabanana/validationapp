@@ -54,18 +54,18 @@ export default function UserDashboard() {
           }}
         />
         <Heading fontSize={"2xl"} fontFamily={"body"}>
-          {user.fullname}
+          {user && user.fullname}
         </Heading>
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          {user.email}
+          {user && user.email}
         </Text>
-        <Image src={user.photo1} alt={user.fullname} preview />
-        <Image src={user.photo2} alt={user.fullname} preview />
+        <Image src={user && user.photo1} alt={user && user.fullname} preview />
+        <Image src={user && user.photo2} alt={user && user.fullname} preview />
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          {user.username}
+          {user && user.username}
         </Text>
         <Box mt={4} direction={"row"} spacing={4}>
-          {user.validated === true ? (
+          {user && user.validated === true ? (
             <Badge colorScheme="green">Validated</Badge>
           ) : (
             <Badge colorScheme="gray">No validated</Badge>
