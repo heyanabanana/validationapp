@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { FilterMatchMode } from "primereact/api";
-import useUser from "../config/UseUser";
 import getUsers from "../services/getUsers";
 import { InputText } from "primereact/inputtext";
 import { TriStateCheckbox } from "primereact/tristatecheckbox";
@@ -24,7 +23,6 @@ import { ENDPOINT } from "../config/ENPOINT";
 
 const AdminDashboard = () => {
   //SET AUTH
-  const { isLogged } = useUser();
   const [users, setUsers] = useState("");
   const token = window.sessionStorage.getItem("token");
   useEffect(() => {
@@ -134,7 +132,6 @@ const AdminDashboard = () => {
   const onClose = () => {
     setIsOpen(false);
   };
-  console.log(selectedUser);
   const cancelRef = React.useRef();
 
   const verifyUser = () => {

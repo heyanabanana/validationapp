@@ -1,6 +1,6 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect, useState } from "react";
-import { useLocation, Link } from "wouter";
+import React from "react";
+import { Link } from "wouter";
 import useUser from "../config/UseUser";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -19,13 +19,8 @@ import {
   AlertTitle,
   CloseButton,
 } from "@chakra-ui/react";
-import { Redirect } from "wouter";
 
 export default function Login() {
-  const [, navigate] = useLocation();
-
-  // const [role, setRole] = useState();
-
   //FORM VALIDATION
   const schema = yup
     .object({
@@ -34,7 +29,7 @@ export default function Login() {
     })
     .required();
 
-  const { isLoginLoading, hasLoginError, login, role, isLogged } = useUser();
+  const { isLoginLoading, hasLoginError, login } = useUser();
   const {
     register,
     handleSubmit,

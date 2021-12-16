@@ -6,7 +6,6 @@ import theme from "./styles/theme";
 import Fonts from "./styles/fonts";
 
 // IMPORTS
-import SectionContainer from "./components/SectionContainer";
 import { UserContextProvider } from "./config/UserContext";
 import { Route } from "wouter";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -26,7 +25,7 @@ function App() {
     <UserContextProvider>
       <ChakraProvider theme={theme}>
         <Fonts />
-        <SectionContainer className="App">
+        <div className="App">
           <NavBar />
           <Route path="/" component={HomePage} />
           <Route path="/*" component={NotFound} />
@@ -39,7 +38,7 @@ function App() {
           <Route path="/onboarding/:hashcode">
             {(params) => <UploadImages id={params.hashcode} />}
           </Route>
-        </SectionContainer>
+        </div>
       </ChakraProvider>
     </UserContextProvider>
   );

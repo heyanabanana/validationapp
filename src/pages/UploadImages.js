@@ -1,10 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Flex, Button } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 import { ENDPOINT } from "../config/ENPOINT";
-import useUser from "../config/UseUser";
 
-import { FilePond, File, registerPlugin } from "react-filepond";
+import { FilePond, registerPlugin } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
@@ -16,13 +14,11 @@ import { useLocation } from "wouter";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 function UploadImages() {
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
 
   const routeHash = location.replace("validationapp.vercel.app/onboarding", "");
 
   const hashRoute = routeHash.replace("/onboarding/", "");
-
-  console.log(hashRoute);
 
   const [files, setFiles] = useState([]);
 

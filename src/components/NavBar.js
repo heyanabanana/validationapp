@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Stack,
-  Heading,
-  Flex,
-  Button,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Heading, Flex, Button, useDisclosure } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "wouter";
 import useUser from "../config/UseUser";

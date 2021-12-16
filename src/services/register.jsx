@@ -21,13 +21,7 @@ export default function registerService({
       return res.json();
     })
     .then((res) => {
-      console.log(res)
-      // const username = res.user.username;
-      // const fullname = res.user.fullname;
-      // const hashcode = res.hashcode;
-      // window.sessionStorage.setItem("hashcode", hashcode);
-      // window.sessionStorage.setItem("username", username);
-      // window.sessionStorage.setItem("fullname", fullname);
+      console.log(res);
 
       return res;
     });

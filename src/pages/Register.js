@@ -51,7 +51,6 @@ export default function Register() {
 
   const onSubmit = (data) => {
     signIn(data);
-    console.log(data);
     setHashcode(window.sessionStorage.getItem("hashcode"));
   };
 

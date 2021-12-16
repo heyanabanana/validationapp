@@ -4,33 +4,26 @@ import {
   Box,
   Center,
   Text,
-  Stack,
   Badge,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Image } from "primereact/image";
-
+import getUserHash from "../services/getUserHash";
 import { useEffect, useState } from "react";
-import getHashcode from "../services/getHashcode";
 
 export default function UserDashboard() {
+  const [user, setUser] = useState();
   const [hashcode, setHashcode] = useState();
+  const [token, setToken] = useState();
 
-  const userFake = {
-    fullname: "Fulanito Fernandez",
-    email: "fulanito@fernandez.es",
-    photo1:
-      "https://almenas.es/wp-content/uploads/2021/11/dni-para-perros-scaled.jpeg",
-    photo2:
-      "https://edirectotv.com/wp-content/uploads/2021/10/Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-Copia-de-RADIO-NACIONAL-DE-ESPANA-1.png",
-    validated: true,
-  };
-  // useEffect(() => {
-  // const username = window.sessionStorage.getItem("username");
-  // getHashcode(username).then((value) => {
-  //   setHashcode(value);
-  // });
-  // });
+  useEffect(() => {
+    setHashcode(window.sessionStorage.getItem("hashcode"));
+    setToken(window.sessionStorage.getItem("token"));
+    getUserHash(hashcode, token).then((value) => {
+      setUser(value.user);
+    });
+  }, [hashcode, token]);
+
   return (
     <Center py={6}>
       <Box
@@ -61,16 +54,18 @@ export default function UserDashboard() {
           }}
         />
         <Heading fontSize={"2xl"} fontFamily={"body"}>
-          {userFake.fullname}
+          {user.fullname}
         </Heading>
         <Text fontWeight={600} color={"gray.500"} mb={4}>
-          {userFake.email}
+          {user.email}
         </Text>
-        <Image src={userFake.photo1} alt={userFake.fullname} preview />
-        <Image src={userFake.photo2} alt={userFake.fullname} preview />
-
+        <Image src={user.photo1} alt={user.fullname} preview />
+        <Image src={user.photo2} alt={user.fullname} preview />
+        <Text fontWeight={600} color={"gray.500"} mb={4}>
+          {user.username}
+        </Text>
         <Box mt={4} direction={"row"} spacing={4}>
-          {userFake.validated === true ? (
+          {user.validated === true ? (
             <Badge colorScheme="green">Validated</Badge>
           ) : (
             <Badge colorScheme="gray">No validated</Badge>

@@ -19,7 +19,6 @@ export default function useUser() {
       loginService({ username, password })
         .then((res) => {
           setState({ loading: false, error: false });
-          console.log(res);
           setToken(res.token);
           setRole(res.role);
           setUsername(res.username);

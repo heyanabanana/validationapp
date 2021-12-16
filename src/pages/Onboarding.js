@@ -6,7 +6,7 @@ import {
   ListItem,
   Button,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import QRCode from "react-qr-code";
 import { Link } from "wouter";
 

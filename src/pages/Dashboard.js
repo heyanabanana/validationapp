@@ -3,13 +3,11 @@ import AdminDashboard from "../components/AdminDashboard";
 import UserDashboard from "../components/UserDashboard";
 
 import useUser from "../config/UseUser";
-import Login from "./Login";
 import { useLocation } from "wouter";
 
 function Dashboard() {
   const [, navigate] = useLocation();
   const { isLogged, role } = useUser();
-  console.log(isLogged);
   return (
     <>
       {isLogged ? (
